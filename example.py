@@ -5,8 +5,9 @@ Example usage of the llm-digitalocean plugin
 
 import os
 import sys
-import llm
 from pathlib import Path
+
+import llm
 
 # Add the current directory to Python path so we can import the plugin
 sys.path.insert(0, str(Path(__file__).parent))
