@@ -51,12 +51,17 @@ class _mixin:
 
     def build_kwargs(self, prompt, stream):
         kwargs = super().build_kwargs(prompt, stream)
+        # The parent class already handles the stream parameter
+        # We just need to ensure stream_options is set when streaming
+        if stream:
+            kwargs["stream_options"] = {"include_usage": True}
         return kwargs
 
 
 class DigitalOceanChat(_mixin, Chat):
     needs_key = "digitalocean"
     key_env_var = "DIGITAL_OCEAN"
+    can_stream = True
 
     def __str__(self):
         return "DigitalOcean: {}".format(self.model_id)
@@ -65,6 +70,7 @@ class DigitalOceanChat(_mixin, Chat):
 class DigitalOceanAsyncChat(_mixin, AsyncChat):
     needs_key = "digitalocean"
     key_env_var = "DIGITAL_OCEAN"
+    can_stream = True
 
     def __str__(self):
         return "DigitalOcean: {}".format(self.model_id)
